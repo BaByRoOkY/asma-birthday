@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Puzzle Gate</title>
+  <style>
+    body {
+      background: linear-gradient(#c9d6ff, #e2e2e2);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .puzzle-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="music/bgm1.mp3" type="audio/mp3" />
+  </audio>
+
+  <div class="puzzle-box">
+    <h2>Unlock the Surprise 🎁</h2>
+    <p>1. What’s the name of your best friend?</p>
+    <input type="text" id="q1" placeholder="Hint: Only close ones know it." />
+    
+    <p>2. When is your birthday? (DDMM)</p>
+    <input type="text" id="q2" placeholder="Hint: DDMM" />
+
+    <p>3. What’s your name?</p>
+    <input type="text" id="q3" placeholder="Hint: Milk product" />
+
+    <p>4. When is your favorate food?</p>
+    <input type="text" id="q4" placeholder="Hint: Hyderabad" />
+
+    <p>5. When is your cat name?</p>
+    <input type="text" id="q5" placeholder="Hint: Orange one" />
+
+    <button onclick="checkAnswers()">Unlock Gallery ➤</button>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const q1 = document.getElementById("q1").value.trim().toLowerCase();
+      const q2 = document.getElementById("q2").value.trim();
+      const q3 = document.getElementById("q3").value.trim().toLowerCase();
+
+      if (q1 === "junnu" && q2 === "2006" && q3 === "junnu" && q4 === "biriyani" && q5 === "laalu") {
+        window.location.href = "gallery.html";
+      } else {
+        document.getElementById("error").textContent = "Wrong answer ra kothi! 😜 Try again...";
+      }
+    }
+  </script>
+</body>
+</html>
