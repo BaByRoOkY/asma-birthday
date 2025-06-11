@@ -3,49 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <title>Message</title>
-  <style>
-    body {
-      background: url('backgrounds/bgmsg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-    }
-    .message-box {
-      background: rgba(0,0,0,0.5);
-      padding: 40px;
-      border-radius: 80px;
-      max-width: 800px;
-      animation: fadeIn 3s ease-in;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    .next-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+<style>
+  body {
+    background-image: url('images/bg.jpg'); /* your background image path */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .message-box {
+    max-width: 90vw;       /* Responsive width */
+    max-height: 80vh;      /* Responsive height */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent bg */
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;      /* Scroll inside box if message is long */
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    transition: transform 0.5s ease;
+  }
+
+  .message-box:hover {
+    transform: scale(1.01);
+  }
+
+  .reveal-button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .reveal-button:hover {
+    background-color: #e73370;
+  }
+</style>
 </head>
+  
 <body>
   <audio autoplay loop>
-    <source src="music/bgm3.mp3" type="audio/mp3" />
-  </audio>
+  <source src="bgms/bgm3.mp3" type="audio/mp3">
+</audio>
 
-  <div class="message-box">
-    <h2>Hey Asma... 💌</h2>
+    <div class="message-box" id="msg" style="display: none;">
     <p>
-      September 18th, 2024 —The day we started talking… 8 PM nunchi morning 4 AM varaku.<br>
+     September 18th, 2024 —The day we started talking… 8 PM nunchi morning 4 AM varaku.<br>
 Who would’ve thought…<br>
 That those endless chats would become a place I now call “peace.”<br>
 That those random chats would become the most important conversations of my day.<br><br>
@@ -80,8 +96,8 @@ So Happy Birthday ra mental 💫<br>
 You better read all this, blush a bit, and act like you’re not emotional —But I know you are 😂<br>
 Stay the same wild, stubborn, crying-yet-smiling Asma.<br>
 I’ll always be here — teasing, advising, understanding… and annoying you forever 😌
-    </p>
-    <button class="next-btn" onclick="window.location.href='final.html'">Final Surprise 🎉</button>
+      </p>
   </div>
+    <button class="reveal-button" onclick="document.getElementById('msg').style.display='block'">Final Surprise 🎉</button>
 </body>
 </html>
