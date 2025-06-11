@@ -4,69 +4,136 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Puzzle Gate</title>
-  <style>
-    body {
-      background: linear-gradient(#c9d6ff, #e2e2e2);
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 50px;
+ <style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #cce0ff, #f0f4ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+    color: #444;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: 0.3s;
+  }
+
+  input[type="text"]:focus {
+    border-color: #66aaff;
+    outline: none;
+    box-shadow: 0 0 5px #99ccff;
+  }
+
+  .btn {
+    margin-top: 15px;
+    padding: 12px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .btn:hover {
+    background: #e73370;
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 500px) {
+    .container {
+      padding: 25px 20px;
     }
-    .puzzle-box {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      display: inline-block;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+    h2 {
+      font-size: 20px;
     }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .hidden { display: none; }
-  </style>
+  }
+</style>
+
 </head>
 <body>
   <audio autoplay loop>
     <source src="music/bgm1.mp3" type="audio/mp3" />
   </audio>
 
-  <div class="puzzle-box">
-    <h2>Unlock the Surprise 🎁</h2>
-    <p>1. What’s the name of your best friend?</p>
-    <input type="text" id="q1" placeholder="Hint: Only close ones know it." />
-    
-    <p>2. When is your birthday? (DDMM)</p>
-    <input type="text" id="q2" placeholder="Hint: DDMM" />
+ <div class="puzzle-box">
+  <h2>Unlock the Surprise 🎁</h2>
+  
+  <label>1. What’s the name of your best friend?</label>
+  <input type="text" placeholder="Hint: Only close ones know it">
 
-    <p>3. What’s your name?</p>
-    <input type="text" id="q3" placeholder="Hint: Milk product" />
+  <label>2. When is your birthday? (DDMM)</label>
+  <input type="text" placeholder="Hint: DDMM">
 
-    <p>4. When is your favorate food?</p>
-    <input type="text" id="q4" placeholder="Hint: Hyderabad" />
+  <label>3. What’s your name?</label>
+  <input type="text" placeholder="Hint: Milk product">
 
-    <p>5. When is your cat name?</p>
-    <input type="text" id="q5" placeholder="Hint: Orange one" />
+  <label>4. When is your favorite food?</label>
+  <input type="text" placeholder="Hint: Hyderabad">
 
-    <button onclick="checkAnswers()">Unlock Gallery ➤</button>
-    <p id="error" style="color: red;"></p>
-  </div>
+  <label>5. When is your cat name?</label>
+  <input type="text" placeholder="Hint: Orange one">
+
+  <button class="btn" onclick="checkAnswers()">Unlock Gallery ➤</button>
+</div>
 
   <script>
-    function checkAnswers() {
-      const q1 = document.getElementById("q1").value.trim().toLowerCase();
-      const q2 = document.getElementById("q2").value.trim();
-      const q3 = document.getElementById("q3").value.trim().toLowerCase();
-      const q4 = document.getElementById("q4").value.trim().toLowerCase();
-      const q5 = document.getElementById("q5").value.trim().toLowerCase();
+  function checkAnswers() {
+    // Get inputs
+    const inputs = document.querySelectorAll("input");
+    const answers = ["asma", "1405", "paneer", "biryani", "simbu"];
 
-      if (q1 === "sasi" && q2 === "2006" && q3 === "junnu" && q4 === "biriyani" && q5 === "laalu") {
-        window.location.href = "gallery.html";
-      } else {
-        document.getElementById("error").textContent = "Wrong answer ra kothi! 😜 Try again...";
+    let correct = true;
+    inputs.forEach((input, i) => {
+      if (input.value.trim().toLowerCase() !== answers[i]) {
+        correct = false;
       }
+    });
+
+    if (correct) {
+      window.location.href = "gallery.html";
+    } else {
+      alert("Try again! Some answers are incorrect.");
     }
-  </script>
+  }
+</script>
 </body>
 </html>
