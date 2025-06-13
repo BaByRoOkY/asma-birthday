@@ -1,4 +1,4 @@
--+!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -162,7 +162,10 @@
         index++;
       } else {
           clearInterval(revealInterval);
-          document.getElementById("finalBtn").style.display = "block"; // Show final button
+          const finalBtn = document.getElementById("finalBtn");
+          finalBtn.style.display = "block";
+          setTimeout(() => finalBtn.classList.add("show"), 50);
+
       }
       }, 1000);
     }
