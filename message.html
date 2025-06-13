@@ -2,119 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Message</title>
-<style>
-  body {
-    background-image: url('backgrounds/bgmsg.jpg'); /* your background image path */
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Message</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('backgrounds/bgmsg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
 
-  .message-box {
-    max-width: 90vw;       /* Responsive width */
-    max-height: 80vh;      /* Responsive height */
-    padding: 20px;
-    border-radius: 20px;
-    overflow-y: auto;      /* Scroll inside box if message is long */
-    text-align: center;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    justify-content: center;
-    transition: transform 0.5s ease;
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
 
-        .next-btn{
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 1rem;
-    background-color: #ff4081;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
+    #revealBtn {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #ff4081;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s ease;
+    }
 
-  .next-btn:hover {
-    background-color: #ff4081;
-  }
-  }
+    #revealBtn:hover {
+      background-color: #e73370;
+    }
 
-  .message-box:hover {
-    transform: scale(1.01);
-  }
-
-  .reveal-button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 1rem;
-    background-color: #ff4081;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .reveal-button:hover {
-    background-color: #e73370;
-
-    
-</style>
+    #messageBox {
+      margin-top: 30px;
+      font-size: 18px;
+      line-height: 1.8;
+      display: none;
+      white-space: pre-line;
+      text-align: center;
+    }
+  </style>
 </head>
-  
 <body>
+
   <audio autoplay loop>
-  <source src="music/bgm3.mp3" type="audio/mp3">
-</audio>
+    <source src="music/bgm3.mp3" type="audio/mp3" />
+  </audio>
 
-    <div class="message-box" id="msg" style="display: none;">
-    <p>
-     September 18th, 2024 —The day we started talking… 8 PM nunchi morning 4 AM varaku.<br>
-Who would’ve thought…<br>
-That those endless chats would become a place I now call “peace.”<br>
-That those random chats would become the most important conversations of my day.<br><br>
-
-We’ve laughed like idiots,<br>
-Teased each other with names like kothi, pandhi, and god-knows-what 🙈<br>
-You’ve ranted, I’ve ranted,<br>
-You’ve cried, I’ve panicked.<br>
-I’ve given free lectures… and you’ve not listened 😂<br>
-Only to come crying later…<br>
-And me? Of course, I consoled you. Because that’s us.<br><br>
-
-You’re the only one who’s seen all my mood swings —(yes, more than you, I know. Don’t roll your eyes 😤)<br>
-End of every month, I explode like a sad volcano…And yet, there you are — listening, understanding, staying.<br>
-How? Why? I don’t even know. But I’m glad you do.<br><br>
-
-You shared your stories — your pain, your present, your past,stories, worries, memories, and nonsense without hesitation.And no matter what… you’ve always matched my energy with your own.
-And for me… you became that one person<br>
-who knows everything, without ever meeting my eyes in class.<br><br>
-
-The funniest part?<br>
-We’re classmates.<br>
-But we don’t talk much in college.<br>
-No one even knows how close we are 😌<br>
-It’s like we’re living a secret friendship story that only we understand —Hidden in DMs, full of real emotions.<br><br>
-
-On your birthday, I just want to say this —You’re one of the few people who can handle me.<br>
-And you’ve done it with patience, madness, and care.<br>
-You’re not just a friend —You’re a constant in my life. Someone I’m truly grateful for.<br><br>
-
-So Happy Birthday ra mental 💫<br>
-You better read all this, blush a bit, and act like you’re not emotional —But I know you are 😂<br>
-Stay the same wild, stubborn, crying-yet-smiling Asma.<br>
-I’ll always be here — teasing, advising, understanding… and annoying you forever 😌
-      </p>
-    <button class="next-btn" onclick="window.location.href='final.html'">Final Surprise 🎉</button>
+  <div class="container">
+    <h2>Hi Asma 💌</h2>
+    <button id="revealBtn" onclick="revealMessage()">Reveal My Heart 🥺</button>
+    <div id="messageBox"></div>
   </div>
-     <button class="reveal-button" onclick="document.getElementById('msg').style.display='block'">Reveal Message</button>
+
+  <script>
+    const messageLines = [
+      "September 18th, 2024 — The day we started talking…",
+      "8 PM nunchi morning 4 AM varaku.",
+      "",
+      "Who would’ve thought…",
+      "That those endless chats would become a place I now call “peace.”",
+      "That those random chats would become the most important conversations of my day.",
+      "",
+      "We’ve laughed like idiots,",
+      "Teased each other with names like kothi, pandhi, and god-knows-what 🙈",
+      "You’ve ranted, I’ve ranted,",
+      "You’ve cried, I’ve panicked.",
+      "I’ve given free lectures… and you’ve not listened 😂",
+      "Only to come crying later…",
+      "And me? Of course, I consoled you. Because that’s us.",
+      "",
+      "You’re the only one who’s seen all my mood swings —",
+      "(yes, more than you, I know. Don’t roll your eyes 😤)",
+      "End of every month, I explode like a sad volcano…",
+      "And yet, there you are — listening, understanding, staying.",
+      "How? Why? I don’t even know. But I’m glad you do.",
+      "",
+      "You shared your stories — your pain, your present, your past,",
+      "stories, worries, memories, and nonsense without hesitation.",
+      "And no matter what…",
+      "you’ve always matched my energy with your own.",
+      "And for me… you became that one person",
+      "who knows everything, without ever meeting my eyes in class.",
+      "",
+      "The funniest part?",
+      "We’re classmates.",
+      "But we don’t talk much in college.",
+      "No one even knows how close we are 😌",
+      "It’s like we’re living a secret friendship story that only we understand —",
+      "Hidden in DMs, full of real emotions.",
+      "",
+      "On your birthday, I just want to say this —",
+      "You’re one of the few people who can handle me.",
+      "And you’ve done it with patience, madness, and care.",
+      "You’re not just a friend —",
+      "You’re a constant in my life.",
+      "Someone I’m truly grateful for.",
+      "",
+      "So Happy Birthday ra mental 💫",
+      "You better read all this, blush a bit, and act like you’re not emotional —",
+      "But I know you are 😂",
+      "Stay the same wild, stubborn, crying-yet-smiling Asma.",
+      "I’ll always be here — teasing, advising, understanding…",
+      "and annoying you forever 😌"
+    ];
+
+    function revealMessage() {
+      const button = document.getElementById("revealBtn");
+      const messageBox = document.getElementById("messageBox");
+
+      button.style.display = "none";
+      messageBox.style.display = "block";
+
+      let index = 0;
+      const revealInterval = setInterval(() => {
+        if (index < messageLines.length) {
+          messageBox.innerHTML += messageLines[index] + "\n";
+          index++;
+        } else {
+          clearInterval(revealInterval);
+        }
+      }, 1000); // 1 second per line
+    }
+  </script>
 </body>
 </html>
