@@ -6,91 +6,107 @@
   <title>Puzzle Gate</title>
   <style>
    body {
-    background-image: url('https://babyrooky.github.io/asma-birthday/backgrounds/bgidx.jpg');
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background: url('https://babyrooky.github.io/asma-birthday/backgrounds/bgidx.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Frosted puzzle box */
+.puzzle-box {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Optional fallback inner blur for older browsers */
+.puzzle-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: -1;
+  border-radius: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+label {
+  font-weight: 500;
+  margin-top: 12px;
+  display: block;
+  color: #333;
+  font-size: 15px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #66aaff;
+  outline: none;
+  box-shadow: 0 0 5px #99ccff;
+}
+
+.btn {
+  margin-top: 15px;
+  padding: 12px;
+  background: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #e73370;
+  transform: scale(1.03);
+}
+
+@media (max-width: 500px) {
+  .puzzle-box {
+    padding: 30px 20px;
   }
 
-    .puzzle-box {
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 20px;
-      padding: 40px 30px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      width: 90%;
-      max-width: 400px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #222;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-
-    label {
-      font-weight: 500;
-      margin-top: 12px;
-      display: block;
-      color: #333;
-      font-size: 15px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 14px;
-      margin-top: 5px;
-      margin-bottom: 10px;
-      transition: 0.3s;
-    }
-
-    input[type="text"]:focus {
-      border-color: #66aaff;
-      outline: none;
-      box-shadow: 0 0 5px #99ccff;
-    }
-
-    .btn {
-      margin-top: 15px;
-      padding: 12px;
-      background: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .btn:hover {
-      background: #e73370;
-      transform: scale(1.03);
-    }
-
-    @media (max-width: 500px) {
-      .puzzle-box {
-        padding: 30px 20px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-    }
-  </style>
+  h2 {
+    font-size: 20px;
+  }
+}
+</style>
 </head>
+  
 <body>
   <audio autoplay loop>
     <source src="music/bgm1.mp3" type="audio/mp3" />
