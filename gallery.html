@@ -1,89 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Gallery</title>
-<style>
-  body {
-    background-color: #111;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  h1 {
-    text-align: center;
-    padding-top: 20px;
-    font-size: 2.5rem;
-  }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('backgrounds/bg-gallery.jpg') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
 
-  .photo-gallery {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 20px;
-    gap: 20px;
-  }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
 
-  .photo-gallery img {
-    max-width: 90vw; /* responsive to device */
-    max-height: 80vh; /* responsive to screen height */
-    height: auto;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
+    .carousel {
+      perspective: 1200px;
+      width: 90vw;
+      height: 400px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 40s infinite linear;
+    }
 
-  .photo-gallery img:hover {
-    transform: scale(1.03);
-  }
+    .carousel:hover {
+      animation-play-state: paused;
+    }
 
-  .next-button {
-    display: block;
-    margin: 40px auto;
-    padding: 12px 30px;
-    background-color: #ff4081;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
+    .carousel img {
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0.5;
+      cursor: pointer;
+    }
 
-  .next-button:hover {
-    background-color: #e73370;
-  }
-</style>
+    .carousel img:hover {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+
+    .socials {
+      margin-top: 30px;
+      font-size: 24px;
+    }
+
+    .socials a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: #ff9ff3;
+    }
+
+    .next-btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      background-color: #ff6b81;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .next-btn:hover {
+      background-color: #ff4757;
+    }
+
+    audio {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+  </style>
 </head>
-
 <body>
   <audio autoplay loop>
-    <source src="music/bgm2.mp3" type="audio/mp3" />
+    <source src="music/bgm2.mp3" type="audio/mp3">
   </audio>
 
-  <script>
-    window.onload = () => {
-    document.querySelector('.photo-gallery').scrollLeft = 0;
-  }
-</script>
+  <h1>Memory Carousel 🎡</h1>
 
-  <h1>Clicks of Asmi the Birthday girl 📸</h1>
-
-  <div class="photo-gallery">
-    <img src="photos/photo1.jpg" alt="Photo 1">
-    <img src="photos/photo2.jpg" alt="Photo 2">
-    <img src="photos/photo3.jpg" alt="Photo 3">
-    <img src="photos/photo4.jpg" alt="Photo 4">
-    <img src="photos/photo5.jpg" alt="Photo 5">
-    <img src="photos/photo6.jpg" alt="Photo 6">
-    <img src="photos/photo7.jpg" alt="Photo 7">
+  <div class="carousel" id="carousel">
+    <img src="photos/pic1.jpg" style="transform: rotateY(0deg) translateZ(500px);">
+    <img src="photos/pic2.jpg" style="transform: rotateY(40deg) translateZ(500px);">
+    <img src="photos/pic3.jpg" style="transform: rotateY(80deg) translateZ(500px);">
+    <img src="photos/pic4.jpg" style="transform: rotateY(120deg) translateZ(500px);">
+    <img src="photos/pic5.jpg" style="transform: rotateY(160deg) translateZ(500px);">
+    <img src="photos/pic6.jpg" style="transform: rotateY(200deg) translateZ(500px);">
+    <img src="photos/pic7.jpg" style="transform: rotateY(240deg) translateZ(500px);">
+    <img src="photos/pic8.jpg" style="transform: rotateY(280deg) translateZ(500px);">
+    <img src="photos/pic9.jpg" style="transform: rotateY(320deg) translateZ(500px);">
   </div>
 
-  <button class="next-button" onclick="window.location.href='message.html'">Next ▶</button>
+  <div class="socials">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+  </div>
+
+  <button class="next-btn" onclick="location.href='message.html'">Next ➤</button>
+
 </body>
 </html>
