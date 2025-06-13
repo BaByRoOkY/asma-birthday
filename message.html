@@ -1,8 +1,8 @@
--+<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta nam<e="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Message</title>
   <style>
     body {
@@ -72,6 +72,16 @@
       white-space: pre-line;
       text-align: center;
     }
+
+    #finalBtn {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #finalBtn.show {
+      opacity: 1;
+    }
+
   </style>
 </head>
 <body>
@@ -85,9 +95,7 @@
     <button id="revealBtn" onclick="revealMessage()">Reveal My Heart 🥺</button>
     <div id="messageBox"></div>
 
-    <a id="finalBtn" href="final.html" style="display: none;">
-      <button class="final-btn">Go to Final Wishes 🎉</button>
-    </a>
+    <button id="finalBtn" class="final-btn" style="display: none;" onclick="location.href='final.html'">Go to Final Wishes 🎉</button>
   </div>
 
   <script>
