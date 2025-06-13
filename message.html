@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+-+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -42,6 +42,24 @@
       transition: 0.3s ease;
     }
 
+    .final-btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s ease;
+    }
+
+    .final-btn:hover {
+      background-color: #43a047;
+    }
+
+
     #revealBtn:hover {
       background-color: #e73370;
     }
@@ -66,6 +84,10 @@
     <h2>Hi Asma 💌</h2>
     <button id="revealBtn" onclick="revealMessage()">Reveal My Heart 🥺</button>
     <div id="messageBox"></div>
+
+    <a id="finalBtn" href="final.html" style="display: none;">
+      <button class="final-btn">Go to Final Wishes 🎉</button>
+    </a>
   </div>
 
   <script>
@@ -121,21 +143,20 @@
     ];
 
     function revealMessage() {
-      const button = document.getElementById("revealBtn");
+      document.getElementById("revealBtn").style.display = "none";
       const messageBox = document.getElementById("messageBox");
-
-      button.style.display = "none";
       messageBox.style.display = "block";
 
       let index = 0;
       const revealInterval = setInterval(() => {
-        if (index < messageLines.length) {
-          messageBox.innerHTML += messageLines[index] + "\n";
-          index++;
-        } else {
+      if (index < messageLines.length) {
+        messageBox.innerHTML += messageLines[index] + "\n";
+        index++;
+      } else {
           clearInterval(revealInterval);
-        }
-      }, 1000); // 1 second per line
+          document.getElementById("finalBtn").style.display = "block"; // Show final button
+      }
+      }, 1000);
     }
   </script>
 </body>
