@@ -113,54 +113,57 @@
       <img src="photos/photo10.jpg" style="transform: rotateY(324deg) translateZ(500px);" />
     </div>
 
-    <div class="social-links">
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-whatsapp"></i></a>
-      <a href="#"><i class="fab fa-facebook"></i></a>
-    </div>
-
     <button class="next-btn" onclick="location.href='message.html'">Next ➤</button>
   </div>
 
   <script>
-    const carousel = document.getElementById("carousel");
-    let angle = 0;
-    let startX;
+  const carousel = document.getElementById("carousel");
+  let angle = 0;
+  let startX;
 
-    const rotateCarousel = (direction) => {
-      angle += direction * 36; // 360/10 images = 36
-      carousel.style.transform = `rotateY(${angle}deg)`;
-    };
+  const rotateCarousel = (direction) => {
+    angle += direction * 36; // 10 images: 360/10 = 36 deg
+    carousel.style.transform = `rotateY(${angle}deg)`;
+  };
 
-    // Mouse drag
-    carousel.addEventListener("mousedown", (e) => {
-      startX = e.clientX;
-      carousel.style.cursor = "grabbing";
-    });
+  // Mouse drag
+  carousel.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+    carousel.style.cursor = "grabbing";
+  });
 
-    window.addEventListener("mouseup", (e) => {
-      if (startX !== undefined) {
-        const deltaX = e.clientX - startX;
-        if (Math.abs(deltaX) > 30) {
-          rotateCarousel(deltaX < 0 ? 1 : -1);
-        }
-        startX = undefined;
-        carousel.style.cursor = "grab";
-      }
-    });
-
-    // Touch drag
-    carousel.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    carousel.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const deltaX = endX - startX;
+  window.addEventListener("mouseup", (e) => {
+    if (startX !== undefined) {
+      const deltaX = e.clientX - startX;
       if (Math.abs(deltaX) > 30) {
         rotateCarousel(deltaX < 0 ? 1 : -1);
       }
-    });
-  </script>
+      startX = undefined;
+      carousel.style.cursor = "grab";
+    }
+  });
+
+  // Touch drag
+  carousel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const deltaX = endX - startX;
+    if (Math.abs(deltaX) > 30) {
+      rotateCarousel(deltaX < 0 ? 1 : -1);
+    }
+  });
+
+  // Wheel scroll
+  let scrollTimeout;
+  window.addEventListener("wheel", (e) => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      rotateCarousel(e.deltaY > 0 ? 1 : -1);
+    }, 50);
+  });
+</script>
 </body>
 </html>
