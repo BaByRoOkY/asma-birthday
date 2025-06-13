@@ -4,136 +4,135 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Puzzle Gate</title>
- <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #cce0ff, #f0f4ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('background.bgidx.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  .container {
-    background: #ffffff;
-    padding: 30px 25px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 90%;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-
-  label {
-    font-weight: 500;
-    margin-top: 10px;
-    display: block;
-    color: #444;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 14px;
-    margin-top: 5px;
-    transition: 0.3s;
-  }
-
-  input[type="text"]:focus {
-    border-color: #66aaff;
-    outline: none;
-    box-shadow: 0 0 5px #99ccff;
-  }
-
-  .btn {
-    margin-top: 15px;
-    padding: 12px;
-    background: #ff4081;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    width: 100%;
-  }
-
-  .btn:hover {
-    background: #e73370;
-    transform: scale(1.02);
-  }
-
-  @media (max-width: 500px) {
-    .container {
-      padding: 25px 20px;
+    .puzzle-box {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 400px;
     }
 
     h2 {
-      font-size: 20px;
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+      font-size: 24px;
     }
-  }
-</style>
 
+    label {
+      font-weight: 500;
+      margin-top: 12px;
+      display: block;
+      color: #333;
+      font-size: 15px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #66aaff;
+      outline: none;
+      box-shadow: 0 0 5px #99ccff;
+    }
+
+    .btn {
+      margin-top: 15px;
+      padding: 12px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: #e73370;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 500px) {
+      .puzzle-box {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <audio autoplay loop>
     <source src="music/bgm1.mp3" type="audio/mp3" />
   </audio>
 
- <div class="puzzle-box">
-  <h2>Unlock the Surprise 🎁</h2>
-  
-  <label>1. What’s the name of your best friend?</label>
-  <input type="text" placeholder="Hint: Only close ones know it">
+  <div class="puzzle-box">
+    <h2>Unlock the Surprise 🎁</h2>
+    
+    <label>1. What’s the name of your best friend?</label>
+    <input type="text" placeholder="Hint: Only close ones know it">
 
-  <label>2. When is your birthday? (DDMM)</label>
-  <input type="text" placeholder="Hint: DDMM">
+    <label>2. When is your birthday? (DDMM)</label>
+    <input type="text" placeholder="Hint: DDMM">
 
-  <label>3. What’s your name?</label>
-  <input type="text" placeholder="Hint: Milk product">
+    <label>3. What’s your name?</label>
+    <input type="text" placeholder="Hint: Milk product">
 
-  <label>4. When is your favorite food?</label>
-  <input type="text" placeholder="Hint: Hyderabad">
+    <label>4. When is your favorite food?</label>
+    <input type="text" placeholder="Hint: Hyderabad">
 
-  <label>5. When is your cat name?</label>
-  <input type="text" placeholder="Hint: Orange one">
+    <label>5. When is your cat name?</label>
+    <input type="text" placeholder="Hint: Orange one">
 
-  <button class="btn" onclick="checkAnswers()">Unlock Gallery ➤</button>
-</div>
+    <button class="btn" onclick="checkAnswers()">Unlock Gallery ➤</button>
+  </div>
 
   <script>
-  function checkAnswers() {
-    // Get inputs
-    const inputs = document.querySelectorAll("input");
-    const answers = ["zaid", "2006", "junnu", "biriyani", "laalu"];
+    function checkAnswers() {
+      const inputs = document.querySelectorAll("input");
+      const answers = ["zaid", "2006", "junnu", "biriyani", "laalu"];
 
-    let correct = true;
-    inputs.forEach((input, i) => {
-      if (input.value.trim().toLowerCase() !== answers[i]) {
-        correct = false;
+      let correct = true;
+      inputs.forEach((input, i) => {
+        if (input.value.trim().toLowerCase() !== answers[i]) {
+          correct = false;
+        }
+      });
+
+      if (correct) {
+        window.location.href = "gallery.html";
+      } else {
+        alert("Wrong answer ra kothi! 😜 Try again...");
       }
-    });
-
-    if (correct) {
-      window.location.href = "gallery.html";
-    } else {
-      alert("Wrong answer ra kothi! 😜 Try again...");
     }
-  }
-</script>
+  </script>
 </body>
 </html>
