@@ -1,120 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Gallery</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dreamy Memories Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      background: url('backgrounds/bggallery.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
     }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: url('backgrounds/bg-gallery.jpg') no-repeat center center fixed;
-      background-size: cover;
-      backdrop-filter: blur(6px);
-      overflow: hidden;
+    .gallery-container {
+      perspective: 1200px;
+      width: 100vw;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      color: #fff;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      position: relative;
     }
 
     .carousel {
-      perspective: 1200px;
-      width: 90vw;
-      height: 400px;
+      width: 420px;
+      height: 420px;
       position: relative;
       transform-style: preserve-3d;
-      animation: spin 40s infinite linear;
-    }
-
-    .carousel:hover {
-      animation-play-state: paused;
+      transition: transform 1s;
     }
 
     .carousel img {
       position: absolute;
-      width: 300px;
-      height: 400px;
+      width: 240px;
+      height: 340px;
       object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      opacity: 0.5;
-      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      opacity: 0.6;
+      cursor: grab;
     }
 
     .carousel img:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
       opacity: 1;
+      box-shadow: 0 0 30px #ffb6c1;
     }
 
-    @keyframes spin {
-      from {
-        transform: rotateY(0deg);
-      }
-      to {
-        transform: rotateY(360deg);
-      }
+    .social-links {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 25px;
+    }
+
+    .social-links a {
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #ff99c8;
+      transform: scale(1.2);
     }
 
     .next-btn {
-      margin-top: 40px;
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff69b4;
       padding: 12px 30px;
-      background-color: #ff6b81;
       color: white;
       border: none;
-      border-radius: 30px;
-      font-size: 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.3s;
     }
 
     .next-btn:hover {
-      background-color: #ff4757;
-    }
-
-    audio {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
+      background-color: #e055a0;
     }
   </style>
 </head>
 <body>
   <audio autoplay loop>
-    <source src="music/bgm2.mp3" type="audio/mp3">
+    <source src="music/bgm2.mp3" type="audio/mp3" />
   </audio>
 
-  <h1>Memory Carousel 🎡</h1>
+  <div class="gallery-container">
+    <div class="carousel" id="carousel">
+      <!-- 10 Images positioned at 36° intervals -->
+      <img src="photos/photo1.jpg" style="transform: rotateY(0deg) translateZ(500px);" />
+      <img src="photos/photo2.jpg" style="transform: rotateY(36deg) translateZ(500px);" />
+      <img src="photos/photo3.jpg" style="transform: rotateY(72deg) translateZ(500px);" />
+      <img src="photos/photo4.jpg" style="transform: rotateY(108deg) translateZ(500px);" />
+      <img src="photos/photo5.jpg" style="transform: rotateY(144deg) translateZ(500px);" />
+      <img src="photos/photo6.jpg" style="transform: rotateY(180deg) translateZ(500px);" />
+      <img src="photos/photo7.jpg" style="transform: rotateY(216deg) translateZ(500px);" />
+      <img src="photos/photo8.jpg" style="transform: rotateY(252deg) translateZ(500px);" />
+      <img src="photos/photo9.jpg" style="transform: rotateY(288deg) translateZ(500px);" />
+      <img src="photos/photo10.jpg" style="transform: rotateY(324deg) translateZ(500px);" />
+    </div>
 
-  <div class="carousel" id="carousel">
-    <img src="photos/photo1.jpg" style="transform: rotateY(0deg) translateZ(500px);">
-    <img src="photos/photo2.jpg" style="transform: rotateY(40deg) translateZ(500px);">
-    <img src="photos/photo3.jpg" style="transform: rotateY(80deg) translateZ(500px);">
-    <img src="photos/photo4.jpg" style="transform: rotateY(120deg) translateZ(500px);">
-    <img src="photos/photo5.jpg" style="transform: rotateY(160deg) translateZ(500px);">
-    <img src="photos/photo6.jpg" style="transform: rotateY(200deg) translateZ(500px);">
-    <img src="photos/photo7.jpg" style="transform: rotateY(240deg) translateZ(500px);">
-    <img src="photos/photo8.jpg" style="transform: rotateY(280deg) translateZ(500px);">
-    <img src="photos/photo9.jpg" style="transform: rotateY(320deg) translateZ(500px);">
-    <img src="photos/photo10.jpg" style="transform: rotateY(320deg) translateZ(500px);">
+    <div class="social-links">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+    </div>
+
+    <button class="next-btn" onclick="location.href='message.html'">Next ➤</button>
   </div>
 
-  <button class="next-btn" onclick="location.href='message.html'">Next ➤</button>
+  <script>
+    const carousel = document.getElementById("carousel");
+    let angle = 0;
+    let startX;
 
+    const rotateCarousel = (direction) => {
+      angle += direction * 36; // 360/10 images = 36
+      carousel.style.transform = `rotateY(${angle}deg)`;
+    };
+
+    // Mouse drag
+    carousel.addEventListener("mousedown", (e) => {
+      startX = e.clientX;
+      carousel.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mouseup", (e) => {
+      if (startX !== undefined) {
+        const deltaX = e.clientX - startX;
+        if (Math.abs(deltaX) > 30) {
+          rotateCarousel(deltaX < 0 ? 1 : -1);
+        }
+        startX = undefined;
+        carousel.style.cursor = "grab";
+      }
+    });
+
+    // Touch drag
+    carousel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carousel.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+      if (Math.abs(deltaX) > 30) {
+        rotateCarousel(deltaX < 0 ? 1 : -1);
+      }
+    });
+  </script>
 </body>
 </html>
