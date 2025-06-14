@@ -50,7 +50,10 @@
       transform: translateX(-50%);
       transform-style: preserve-3d;
       transition: transform 1s;
-    }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
 
     .carousel img {
       position: absolute;
@@ -59,9 +62,8 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
-      transform-origin: center center;
       transition: transform 0.5s;
-    }
+  }
 
     .carousel-buttons {
       margin-top: 30px;
@@ -128,61 +130,67 @@
   <div class="edge-hover-zone right-hover" onmouseenter="hoverScroll(1)" onmouseleave="stopScroll()"></div>
 
   <script>
-    const carousel = document.getElementById("carousel");
-    const total = carousel.querySelectorAll("img").length;
-    const step = 360 / total;
-    let angle = 0;
-    let hoverInterval = null;
-    let startX = null;
+  const carousel = document.getElementById("carousel");
+  const images = carousel.querySelectorAll("img");
+  const total = images.length;
+  const step = 360 / total;
+  let angle = 0;
 
-    const rotateCarousel = (dir) => {
-      angle += dir * step;
-      carousel.style.transform = `translateX(-50%) rotateY(${angle}deg)`;
-    };
+  // Position each image in a circle
+  function updateImages() {
+    for (let i = 0; i < total; i++) {
+      const imgAngle = step * i + angle;
+      const radians = imgAngle * (Math.PI / 180);
+      const radius = 400; // Fixed radius
+      const x = Math.sin(radians) * radius;
+      const z = Math.cos(radians) * radius;
 
-    // Mouse drag
-    carousel.addEventListener("mousedown", (e) => {
-      startX = e.clientX;
-    });
+      images[i].style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${imgAngle}deg)`;
+    }
+  }
 
-    window.addEventListener("mouseup", (e) => {
-      if (startX !== null) {
-        const deltaX = e.clientX - startX;
-        if (Math.abs(deltaX) > 30) {
-          rotateCarousel(deltaX < 0 ? 1 : -1);
-        }
-        startX = null;
-      }
-    });
+  function rotateCarousel(dir) {
+    angle += dir * step;
+    updateImages();
+  }
 
-    // Touch drag
-    carousel.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
+  updateImages(); // Initial call
 
-    carousel.addEventListener("touchend", (e) => {
-      const deltaX = e.changedTouches[0].clientX - startX;
-      if (Math.abs(deltaX) > 30) {
-        rotateCarousel(deltaX < 0 ? 1 : -1);
-      }
+  // Drag Events
+  let startX = null;
+  carousel.addEventListener("mousedown", (e) => startX = e.clientX);
+  window.addEventListener("mouseup", (e) => {
+    if (startX !== null) {
+      const deltaX = e.clientX - startX;
+      if (Math.abs(deltaX) > 30) rotateCarousel(deltaX < 0 ? 1 : -1);
       startX = null;
-    });
-
-    // Scroll wheel
-    window.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      rotateCarousel(e.deltaY > 0 ? 1 : -1);
-    }, { passive: false });
-
-    // Edge hover scroll
-    function hoverScroll(dir) {
-      hoverInterval = setInterval(() => rotateCarousel(dir), 300);
     }
+  });
 
-    function stopScroll() {
-      clearInterval(hoverInterval);
-    }
-  </script>
+  // Touch Events
+  carousel.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+  carousel.addEventListener("touchend", (e) => {
+    const deltaX = e.changedTouches[0].clientX - startX;
+    if (Math.abs(deltaX) > 30) rotateCarousel(deltaX < 0 ? 1 : -1);
+    startX = null;
+  });
+
+  // Scroll
+  window.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    rotateCarousel(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false });
+
+  // Edge hover scroll
+  let hoverInterval = null;
+  function hoverScroll(dir) {
+    hoverInterval = setInterval(() => rotateCarousel(dir), 300);
+  }
+  function stopScroll() {
+    clearInterval(hoverInterval);
+  }
+</script>
+
 
 </body>
 </html>
