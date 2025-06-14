@@ -33,11 +33,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative; /* ADD THIS */
+      position: relative;
+      padding-bottom: 100px; /* Space for buttons */
       min-height: 100vh;
     }
 
@@ -45,9 +42,10 @@
       perspective: 1200px;
       width: auto;
       height: auto;
-      position: center;
       margin: 20px auto;
+      position: relative;
     }
+
     .carousel {
       position: relative;
       transform-style: preserve-3d;
@@ -69,10 +67,9 @@
       transition: transform 0.5s;
     }
 
-
     .carousel-buttons {
       position: absolute;
-      bottom: 50px;
+      bottom: -80px; /* Pushes buttons below the carousel */
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -81,7 +78,6 @@
       flex-wrap: wrap;
       z-index: 10;
     }
-
 
     .carousel-buttons button {
       padding: 12px 24px;
@@ -132,12 +128,12 @@
         <img src="photos/photo9.jpg" style="transform: rotateY(288deg) translateZ(500px);">
         <img src="photos/photo10.jpg" style="transform: rotateY(324deg) translateZ(500px);">
       </div>
-    </div>
 
-    <div class="carousel-buttons">
-      <button onclick="rotateCarousel(-1)">←</button>
-      <button onclick="rotateCarousel(1)">→</button>
-      <button onclick="location.href='message.html'">Go to Message 💌</button>
+      <div class="carousel-buttons">
+        <button onclick="rotateCarousel(-1)">←</button>
+        <button onclick="rotateCarousel(1)">→</button>
+        <button onclick="location.href='message.html'">Go to Message 💌</button>
+      </div>
     </div>
   </div>
 
