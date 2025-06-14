@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dreamy Memories Gallery 🥰 </title>
+  <title>Dreamy Memories Gallery</title>
   <style>
     body {
       margin: 0;
@@ -11,13 +11,13 @@
       background: url('backgrounds/bggallery.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     h1.gallery-title {
       text-align: center;
       color: #fff;
-      margin: 40px 0 20px;
+      margin: 30px 0 10px;
       font-size: 36px;
       font-weight: bold;
       text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -30,42 +30,39 @@
 
     .carousel-wrapper {
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
-    }
-
-    .carousel-container {
-      display: flex;
-      overflow: hidden;
-      max-width: 90vw;
-      margin: 20px auto;
-      scroll-behavior: smooth;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 150px);
     }
 
     .carousel {
       display: flex;
-      transition: transform 0.5s ease;
-      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      margin-top: 20px;
+      position: relative;
+      width: 80%;
+      height: 400px;
+      overflow: hidden;
     }
 
     .carousel img {
-      height: 300px;
+      position: absolute;
+      max-height: 300px;
       width: auto;
+      transition: all 0.6s ease;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
-    }
-
-    .carousel img:hover {
-      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
     .carousel-buttons {
-      margin-top: 20px;
+      margin-top: 30px;
       display: flex;
       gap: 20px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .carousel-buttons button {
@@ -84,61 +81,63 @@
     .carousel-buttons button:hover {
       background-color: #ffffff60;
     }
-
-    /* Scrollbar Hidden */
-    .carousel-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    .carousel-container {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
   </style>
 </head>
 <body>
 
-  <div class="carousel-wrapper">
-    <h1 class="gallery-title">Dreamy Memories Gallery 🌸</h1>
+  <h1 class="gallery-title">Dreamy Memories Gallery 🌸</h1>
 
-    <div class="carousel-container" id="carouselContainer">
-      <div class="carousel" id="carousel">
-        <img src="photos/photo1.jpg" alt="Image 1">
-        <img src="photos/photo2.jpg" alt="Image 2">
-        <img src="photos/photo3.jpg" alt="Image 3">
-        <img src="photos/photo4.jpg" alt="Image 4">
-        <img src="photos/photo5.jpg" alt="Image 5">
-        <img src="photos/photo6.jpg" alt="Image 6">
-        <img src="photos/photo7.jpg" alt="Image 7">
-        <img src="photos/photo8.jpg" alt="Image 8">
-        <img src="photos/photo9.jpg" alt="Image 9">
-        <img src="photos/photo10.jpg" alt="Image 10">
-      </div>
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="photos/photo1.jpg" alt="Image 1">
+      <img src="photos/photo2.jpg" alt="Image 2">
+      <img src="photos/photo3.jpg" alt="Image 3">
+      <img src="photos/photo4.jpg" alt="Image 4">
+      <img src="photos/photo5.jpg" alt="Image 5">
+      <img src="photos/photo6.jpg" alt="Image 6">
+      <img src="photos/photo7.jpg" alt="Image 7">
+      <img src="photos/photo8.jpg" alt="Image 8">
+      <img src="photos/photo9.jpg" alt="Image 9">
+      <img src="photos/photo10.jpg" alt="Image 10">
     </div>
 
     <div class="carousel-buttons">
-      <button onclick="scrollGallery(-1)">← Previous</button>
-      <button onclick="scrollGallery(1)">Next →</button>
+      <button onclick="rotateCarousel(-1)">←</button>
+      <button onclick="rotateCarousel(1)">→</button>
+      <button onclick="location.href='message.html'">Go to Message 💌</button>
     </div>
   </div>
 
   <script>
-    const container = document.getElementById('carouselContainer');
+    const images = document.querySelectorAll('.carousel img');
+    let currentIndex = 0;
 
-    function scrollGallery(direction) {
-      const scrollAmount = container.offsetWidth * 0.6; // Adjust scroll step
-      container.scrollBy({
-        left: direction * scrollAmount,
-        behavior: 'smooth'
+    function updateCarousel() {
+      const center = Math.floor(images.length / 2);
+      images.forEach((img, i) => {
+        const offset = i - currentIndex;
+        img.style.transform = `
+          translateX(${offset * 250}px)
+          scale(${1 - Math.abs(offset) * 0.1})
+          rotateY(${offset * -20}deg)
+        `;
+        img.style.zIndex = 100 - Math.abs(offset);
+        img.style.opacity = Math.abs(offset) > 3 ? 0 : 1;
       });
     }
 
-    // Enable mouse scroll left/right
-    container.addEventListener('wheel', (e) => {
+    function rotateCarousel(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      updateCarousel();
+    }
+
+    // Scroll support
+    document.getElementById('carousel').addEventListener('wheel', (e) => {
       e.preventDefault();
-      const direction = e.deltaY > 0 ? 1 : -1;
-      scrollGallery(direction);
+      rotateCarousel(e.deltaY > 0 ? 1 : -1);
     });
+
+    updateCarousel();
   </script>
 
 </body>
