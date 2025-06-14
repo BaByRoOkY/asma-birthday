@@ -12,12 +12,19 @@
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      overflow-x: hidden; /* only hide x scroll, keep y visible */
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     .gallery-title {
-      text-align: center;
-      margin: 30px 0 10px;
       font-size: 36px;
       font-weight: bold;
       text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -25,32 +32,23 @@
       backdrop-filter: blur(5px);
       padding: 10px 20px;
       border-radius: 15px;
-      display: inline-block;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      width: 100%;
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      margin-bottom: 20px;
     }
 
     .carousel-container {
-      perspective: 1200px;
+      perspective: 1000px;
       width: 100%;
+      max-width: 1000px;
       height: 500px;
       position: relative;
     }
 
     .carousel {
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.8s ease;
       width: 100%;
       height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
     }
 
     .carousel img {
@@ -59,17 +57,15 @@
       height: 450px;
       object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-      transform-origin: center center;
-      transition: transform 0.5s;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotateY(0deg) translateZ(500px);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
     .carousel-buttons {
       position: absolute;
-      bottom: 30px;
+      bottom: -60px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -78,27 +74,25 @@
     }
 
     .carousel-buttons button {
-      padding: 12px 24px;
+      padding: 10px 20px;
       font-size: 16px;
-      font-weight: bold;
-      background-color: #ffffff30;
-      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
       border: 2px solid white;
       border-radius: 10px;
       cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: background 0.3s ease;
+      transition: 0.3s;
     }
 
     .carousel-buttons button:hover {
-      background-color: #ffffff60;
+      background-color: rgba(255, 255, 255, 0.4);
     }
 
     .edge-hover-zone {
       position: fixed;
       top: 0;
       bottom: 0;
-      width: 80px;
+      width: 60px;
       z-index: 99;
     }
 
@@ -110,12 +104,9 @@
   <audio autoplay loop>
     <source src="music/bgm2.mp3" type="audio/mp3" />
   </audio>
+  <div class="container">
+    <div class="gallery-title">Dreamy Memories Gallery 🌸🥰</div>
 
-  <div style="text-align:center">
-    <h1 class="gallery-title">Dreamy Memories Gallery 🌸🥰</h1>
-  </div>
-
-  <div class="carousel-wrapper">
     <div class="carousel-container">
       <div class="carousel" id="carousel">
         <img src="photos/photo1.jpg" style="transform: rotateY(0deg) translateZ(500px);">
@@ -129,12 +120,12 @@
         <img src="photos/photo9.jpg" style="transform: rotateY(288deg) translateZ(500px);">
         <img src="photos/photo10.jpg" style="transform: rotateY(324deg) translateZ(500px);">
       </div>
-    </div>
 
-    <div class="carousel-buttons">
-      <button onclick="rotateCarousel(-1)">←</button>
-      <button onclick="rotateCarousel(1)">→</button>
-      <button onclick="location.href='message.html'">Go to Message 💌</button>
+      <div class="carousel-buttons">
+        <button onclick="rotateCarousel(-1)">←</button>
+        <button onclick="rotateCarousel(1)">→</button>
+        <button onclick="location.href='message.html'">Go to Message 💌</button>
+      </div>
     </div>
   </div>
 
@@ -143,53 +134,15 @@
 
   <script>
     const carousel = document.getElementById("carousel");
-    const images = carousel.querySelectorAll("img");
-    const total = images.length;
+    const total = carousel.children.length;
     const step = 360 / total;
     let angle = 0;
-    let startX = null;
     let hoverInterval;
 
-    const rotateCarousel = (dir) => {
+    function rotateCarousel(dir) {
       angle += dir * step;
       carousel.style.transform = `rotateY(${angle}deg)`;
-    };
-
-    carousel.addEventListener("mousedown", (e) => {
-      startX = e.clientX;
-      carousel.style.cursor = "grabbing";
-    });
-
-    window.addEventListener("mouseup", (e) => {
-      if (startX !== null) {
-        const deltaX = e.clientX - startX;
-        if (Math.abs(deltaX) > 30) {
-          rotateCarousel(deltaX < 0 ? 1 : -1);
-        }
-        startX = null;
-        carousel.style.cursor = "grab";
-      }
-    });
-
-    carousel.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    carousel.addEventListener("touchend", (e) => {
-      const deltaX = e.changedTouches[0].clientX - startX;
-      if (Math.abs(deltaX) > 30) {
-        rotateCarousel(deltaX < 0 ? 1 : -1);
-      }
-      startX = null;
-    });
-
-    window.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        rotateCarousel(e.deltaY > 0 ? 1 : -1);
-      }, 50);
-    }, { passive: false });
+    }
 
     function hoverScroll(dir) {
       hoverInterval = setInterval(() => rotateCarousel(dir), 300);
@@ -198,7 +151,12 @@
     function stopScroll() {
       clearInterval(hoverInterval);
     }
-  </script>
 
+    window.addEventListener("wheel", (e) => {
+      if (e.deltaY !== 0) {
+        rotateCarousel(e.deltaY > 0 ? 1 : -1);
+      }
+    });
+  </script>
 </body>
 </html>
