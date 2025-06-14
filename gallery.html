@@ -189,10 +189,21 @@ h1.gallery-title {
     startX = null;
   });
 
-  // Scroll
-  window.addEventListener("wheel", (e) => {
+    // Scroll with sensitivity control
+    let scrollBuffer = 0;
+    const SCROLL_THRESHOLD = 100; // Increase for smoother feel
+
+    window.addEventListener("wheel", (e) => {
     e.preventDefault();
-    rotateCarousel(e.deltaY > 0 ? 1 : -1);
+    scrollBuffer += e.deltaY;
+
+    if (scrollBuffer > SCROLL_THRESHOLD) {
+      rotateCarousel(1);
+      scrollBuffer = 0;
+    } else if (scrollBuffer < -SCROLL_THRESHOLD) {
+      rotateCarousel(-1);
+      scrollBuffer = 0;
+    }
   }, { passive: false });
 
   // Edge hover scroll
