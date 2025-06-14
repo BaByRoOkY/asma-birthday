@@ -33,24 +33,22 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: calc(100vh - 150px);
     }
 
     .carousel-container {
       perspective: 1200px;
-      width: 100%;
-      max-width: 1000px;
-      height: 400px;
+      width: fit-content;
+      height: fit-content;
       position: relative;
-      overflow: visible;
+      margin: 20px auto;
     }
 
     .carousel {
-      width: 100%;
-      height: 100%;
-      position: absolute;
+      position: relative;
       transform-style: preserve-3d;
       transition: transform 0.8s ease;
+      width: fit-content;
+      height: fit-content;
     }
 
     .carousel img {
@@ -60,6 +58,7 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      transform-origin: center center;
       transition: transform 0.5s;
     }
 
@@ -92,7 +91,7 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      width: 100px;
+      width: 80px;
       z-index: 99;
     }
 
