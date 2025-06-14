@@ -33,6 +33,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative; /* ADD THIS */
+      min-height: 100vh;
     }
 
     .carousel-container {
@@ -65,12 +71,17 @@
 
 
     .carousel-buttons {
-      margin-top: 30px;
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
+      z-index: 10;
     }
+
 
     .carousel-buttons button {
       padding: 12px 24px;
